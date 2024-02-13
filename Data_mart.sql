@@ -174,11 +174,10 @@ Retail sales? */
 SELECT
     age_band,
     demographic,
-    SUM(sales) AS total_retail_sales
+    SUM(CASE WHEN platform = 'Retail' THEN sales END) AS retail_sales
 FROM clean_weekly_sales
-WHERE platform = 'Retail'
 GROUP BY age_band, demographic
-ORDER BY total_retail_sales DESC;
+ORDER BY retail_sales DESC;
 
 /* 9. Can we use the avg_transaction column to find the average 
 transaction size for each year for Retail vs Shopify? 
